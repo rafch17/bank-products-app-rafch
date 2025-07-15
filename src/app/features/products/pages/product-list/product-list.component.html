@@ -1,1 +1,61 @@
-<p>product-list works!</p>
+<div class="container">
+    <h2 class="title">BANCO BANQUITO</h2>
+
+    <input type="text" [(ngModel)]="searchQuery" (input)="onSearch()" [disabled]="products.length === 0"
+        placeholder="Buscar..." class="search-input" />
+
+    <table class="product-table" *ngIf="displayedProducts.length > 0; else noResults">
+        <thead>
+            <tr>
+                <th>Logo</th>
+                <th>Nombre del producto</th>
+                <th>Descripción <span title="Descripción del producto">ℹ️</span></th>
+                <th>Fecha de liberación <span title="Fecha de liberación">ℹ️</span></th>
+                <th>Fecha de reestructuración <span title="Fecha de reestructuración">ℹ️</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of displayedProducts">
+                <td>
+                    <img [src]="product.logo" alt="{{ product.name }}" class="avatar-img" />
+                </td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.date_release }}</td>
+                <td>{{ product.date_revision }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ng-template #noResults>
+        <div class="no-results">No hay productos disponibles.</div>
+    </ng-template>
+
+    <div class="footer">
+        <span>{{ filteredProducts.length }} Resultados</span>
+
+        <div class="pagination-controls">
+            <label for="pageSize">Items por página:</label>
+            <select id="pageSize" (change)="onSelectChange($event)">
+                <option [value]="5">5</option>
+                <option [value]="10">10</option>
+                <option [value]="20">20</option>
+            </select>
+
+            <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">«</button>
+
+            <button *ngFor="let page of [].constructor(totalPages); let i = index" (click)="goToPage(i + 1)"
+                [class.active]="currentPage === i + 1">
+                {{ i + 1 }}
+            </button>
+
+            <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">»</button>
+        </div>
+    </div>
+
+
+
+    <ng-template #noResults>
+        <div class="no-results">No hay productos disponibles.</div>
+    </ng-template>
+</div>

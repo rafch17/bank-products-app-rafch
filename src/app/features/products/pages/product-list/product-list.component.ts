@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ProductListComponent {
 
-
+  isLoading = true;
   products: Product[] = [];
   filteredProducts: Product[] = [];
   displayedProducts: Product[] = [];
@@ -86,11 +86,17 @@ export class ProductListComponent {
 
 
   loadProducts() {
-    this.productService.getAll().subscribe(data => {
-      this.products = data;
-      this.filteredProducts = data;
-      this.updateDisplayedProducts();
-    });
+    this.isLoading = true;
+    setTimeout(() => {
+      
+      this.productService.getAll().subscribe(data => {
+        this.products = data;
+        this.filteredProducts = data;
+        this.updateDisplayedProducts();
+      });
+      this.isLoading = false;
+    }, 1500); 
+    
   }
   deleteProduct(product: Product) {
     this.showDeleteModal = true;
@@ -98,7 +104,6 @@ export class ProductListComponent {
     this.selectedProductId = product.id;
   }
   confirmDeleteProduct(id: string) {
-    console.log("entree");
     this.productService.delete(id).subscribe({
       next: () => {
         this.loadProducts();

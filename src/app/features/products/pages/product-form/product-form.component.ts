@@ -103,7 +103,6 @@ export class ProductFormComponent {
     if (this.isEditMode) {
       this.productService.update(this.productId, product).subscribe({
         next: () => {
-          console.log('Producto actualizado');
           this.router.navigate(['/products']);
         },
         error: (err) => console.error(err)

@@ -1,5 +1,5 @@
-<div class="container">
-    <h2 class="title">BANCO BANQUITO</h2>
+<div>
+
 
     <div class="search-add-container">
         <input type="text" [(ngModel)]="searchQuery" (input)="onSearch()" [disabled]="products.length === 0"
@@ -7,37 +7,50 @@
         <app-pichincha-button routerLink="/products/form" label="Agregar" [background]="'#ffdd00'" [color]="'#0f265'" />
     </div>
 
-    <table class="product-table" *ngIf="displayedProducts.length > 0; else noResults">
-        <thead>
-            <tr>
-                <th>Logo</th>
-                <th>Nombre del producto</th>
-                <th>Descripción <span title="Descripción del producto">ℹ️</span></th>
-                <th>Fecha de liberación <span title="Fecha de liberación">ℹ️</span></th>
-                <th>Fecha de reestructuración <span title="Fecha de reestructuración">ℹ️</span></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let product of displayedProducts; let i = index">
-                <td><img [src]="product.logo" alt="{{ product.name }}" class="avatar-img" /></td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.description }}</td>
-                <td>{{ product.date_release }}</td>
-                <td>{{ product.date_revision }}</td>
-                <td class="actions-cell" style="position: relative;">
-                    <button class="btn-more" (click)="toggleActionsMenu(i)">⋮</button>
+    <ng-container *ngIf="!isLoading; else loadingSkeleton">
+        <table class="product-table" *ngIf="displayedProducts.length > 0; else noResults">
+            <thead>
+                <tr>
+                    <th>Logo</th>
+                    <th>Nombre del producto</th>
+                    <th>Descripción <span title="Descripción del producto">ℹ️</span></th>
+                    <th>Fecha de liberación <span title="Fecha de liberación">ℹ️</span></th>
+                    <th>Fecha de reestructuración <span title="Fecha de reestructuración">ℹ️</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of displayedProducts; let i = index">
+                    <td><img [src]="product.logo" alt="{{ product.name }}" class="avatar-img" /></td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.date_release }}</td>
+                    <td>{{ product.date_revision }}</td>
+                    <td class="actions-cell" style="position: relative;">
+                        <button class="btn-more" (click)="toggleActionsMenu(i)">⋮</button>
 
-                    <div *ngIf="openedMenuIndex === i" class="actions-menu">
-                        <button (click)="onEdit(product.id)">Editar</button>
-                        <button (click)="deleteProduct(product)">Eliminar</button>
-                    </div>
-                </td>
+                        <div *ngIf="openedMenuIndex === i" class="actions-menu">
+                            <button (click)="onEdit(product.id)">Editar</button>
+                            <button (click)="deleteProduct(product)">Eliminar</button>
+                        </div>
+                    </td>
 
-            </tr>
-        </tbody>
-    </table>
-
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+    <ng-template #loadingSkeleton>
+        <div class="product-table skeleton-table">
+            <div class="skeleton-row" *ngFor="let i of [].constructor(5)">
+                <div class="skeleton-cell avatar-skeleton"></div>
+                <div class="skeleton-cell"></div>
+                <div class="skeleton-cell"></div>
+                <div class="skeleton-cell"></div>
+                <div class="skeleton-cell"></div>
+                <div class="skeleton-cell"></div>
+            </div>
+        </div>
+    </ng-template>
 
     <ng-template #noResults>
         <div class="no-results">No hay productos disponibles.</div>
@@ -64,7 +77,6 @@
             <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">»</button>
         </div>
     </div>
-
 
 
     <ng-template #noResults>

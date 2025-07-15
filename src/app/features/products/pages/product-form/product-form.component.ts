@@ -121,7 +121,15 @@ export class ProductFormComponent {
 
 
   onReset() {
-    this.productForm.reset();
+    if (this.isEditMode) {
+      this.productForm.get('name')?.reset()
+      this.productForm.get('description')?.reset()
+      this.productForm.get('logo')?.reset()
+      this.productForm.get('date_release')?.reset()
+      this.productForm.get('date_revision')?.reset()
+    } else {
+      this.productForm.reset();
+    }
   }
 
   idExistsValidator(): AsyncValidatorFn {

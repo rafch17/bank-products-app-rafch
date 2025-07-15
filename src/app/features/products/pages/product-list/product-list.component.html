@@ -1,4 +1,4 @@
-<div class="container" >
+<div class="container">
     <h2 class="title">BANCO BANQUITO</h2>
 
     <div class="search-add-container">
@@ -15,7 +15,7 @@
                 <th>Descripción <span title="Descripción del producto">ℹ️</span></th>
                 <th>Fecha de liberación <span title="Fecha de liberación">ℹ️</span></th>
                 <th>Fecha de reestructuración <span title="Fecha de reestructuración">ℹ️</span></th>
-                <th></th> 
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -33,6 +33,7 @@
                         <button (click)="deleteProduct(product)">Eliminar</button>
                     </div>
                 </td>
+
             </tr>
         </tbody>
     </table>
@@ -70,11 +71,7 @@
         <div class="no-results">No hay productos disponibles.</div>
     </ng-template>
 </div>
-<app-pichincha-modal
-  
-  [show]="showDeleteModal"
-  (close)="showDeleteModal = false"
-  (confirm)="confirmDeleteProduct(selectedProductId)"
->
-  <p>¿Estás seguro de eliminar el producto? {{selectedProductName}}</p>
+<app-pichincha-modal [show]="showDeleteModal" (close)="showDeleteModal = false"
+    (confirm)="confirmDeleteProduct(selectedProductId)">
+    <p>¿Estás seguro de eliminar el producto? {{selectedProductName}}</p>
 </app-pichincha-modal>

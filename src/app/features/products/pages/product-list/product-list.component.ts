@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ProductService } from '../../../../core/services/product.service';
 import { Product } from '../../../../core/models/product.model';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ export class ProductListComponent {
   products: Product[] = [];
   filteredProducts: Product[] = [];
   displayedProducts: Product[] = [];
-  openedMenuIndex: number | null = null;
+  openedMenuIndex: number | null = -1;
   searchQuery: string = '';
   selectedProductName: string = '';
   selectedProductId: string = '';
@@ -67,11 +67,7 @@ export class ProductListComponent {
 
 
   toggleActionsMenu(index: number) {
-    if (this.openedMenuIndex === index) {
-      this.openedMenuIndex = null;
-    } else {
-      this.openedMenuIndex = index;
-    }
+    this.openedMenuIndex = this.openedMenuIndex === index ? -1 : index;
   }
 
   onEdit(productId: string) {
@@ -117,4 +113,15 @@ export class ProductListComponent {
     this.openedMenuIndex = null;
 
   }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+
+    if (!target.closest('.actions-cell')) {
+      this.openedMenuIndex = -1;
+    }
+  }
+
+
 }

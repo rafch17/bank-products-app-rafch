@@ -12,7 +12,6 @@ import { PichinchaButtonComponent } from '../../shared/components/pichincha-butt
   declarations: [
     ProductListComponent,
     ProductFormComponent,
-    ProductFormComponent,
   ],
   imports: [
     CommonModule,

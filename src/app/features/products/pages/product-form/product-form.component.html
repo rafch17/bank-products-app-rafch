@@ -1,1 +1,82 @@
-<p>product-create works!</p>
+<div class="container">
+    <h2 class="form-title">Formulario de Registro</h2>
+
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="form-grid">
+
+
+            <div class="form-group" [class.invalid]="id.invalid && (id.dirty || id.touched)">
+                <label for="id">Id</label>
+                <input [disabled]="isEditMode" id="id" type="text" formControlName="id" />
+
+                <div class="error" *ngIf="id.errors && (id.dirty || id.touched)">
+                    <small *ngIf="id.errors['required']">Id es requerido.</small>
+                    <small *ngIf="id.errors['minlength'] || id.errors['maxlength']">Debe tener entre 3 y 10
+                        caracteres.</small>
+                    <small *ngIf="id.errors['idExists']">Este Id ya existe.</small>
+                </div>
+            </div>
+
+            <div class="form-group" [class.invalid]="name.invalid && (name.dirty || name.touched)">
+                <label for="name">Nombre</label>
+                <input id="name" type="text" formControlName="name" />
+                <div class="error" *ngIf="name.errors && (name.dirty || name.touched)">
+                    <small *ngIf="name.errors['required']">Nombre es requerido.</small>
+                    <small *ngIf="name.errors['minlength'] || name.errors['maxlength']">Debe tener entre 5 y 100
+                        caracteres.</small>
+                </div>
+            </div>
+
+
+            <div class="form-group textarea-group"
+                [class.invalid]="description.invalid && (description.dirty || description.touched)">
+                <label for="description">Descripción</label>
+                <input id="description" formControlName="description" />
+                <div class="error" *ngIf="description.errors && (description.dirty || description.touched)">
+                    <small *ngIf="description.errors['required']">Descripción es requerida.</small>
+                    <small *ngIf="description.errors['minlength'] || description.errors['maxlength']">Debe tener entre
+                        10 y 200 caracteres.</small>
+                </div>
+            </div>
+
+            <div class="form-group" [class.invalid]="logo.invalid && (logo.dirty || logo.touched)">
+                <label for="logo">Logo (URL)</label>
+                <input id="logo" type="text" formControlName="logo" />
+                <div class="error" *ngIf="logo.errors && (logo.dirty || logo.touched)">
+                    <small *ngIf="logo.errors['required']">Logo es requerido.</small>
+                </div>
+            </div>
+
+
+            <div class="form-group"
+                [class.invalid]="date_release.invalid && (date_release.dirty || date_release.touched)">
+                <label for="date_release">Fecha de Liberación</label>
+                <input id="date_release" type="date" formControlName="date_release" />
+                <div class="error" *ngIf="date_release.errors && (date_release.dirty || date_release.touched)">
+                    <small *ngIf="date_release.errors['required']">Fecha de liberación es requerida.</small>
+                    <small *ngIf="date_release.errors['minDate']">Debe ser hoy o posterior.</small>
+                </div>
+            </div>
+
+            <div class="form-group"
+                [class.invalid]="date_revision.invalid && (date_revision.dirty || date_revision.touched)">
+                <label for="date_revision">Fecha de Revisión</label>
+                <input id="date_revision" type="date" formControlName="date_revision" />
+
+            </div>
+
+        </div>
+
+
+        <div class="form-buttons">
+            <app-pichincha-button label="Reiniciar" [background]="'#e0e0e0'" [color]="'#333'" (click)="onReset()"
+                type="button" [disabled]="isEditMode">
+            </app-pichincha-button>
+
+            <app-pichincha-button [label]="isEditMode ? 'Editar' : 'Agregar'" [background]="'#ffdd00'"
+                [color]="'#0f2650'" type="submit" [disabled]="productForm.invalid">
+            </app-pichincha-button>
+
+        </div>
+    </form>
+</div>

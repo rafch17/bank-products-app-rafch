@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DropdownMenuComponent } from './dropdown-menu.component';
+import { PichinchaModalComponent } from './pichincha-modal.component';
 
-describe('DropdownMenuComponent', () => {
-  let component: DropdownMenuComponent;
-  let fixture: ComponentFixture<DropdownMenuComponent>;
+describe('PichinchaModalComponent', () => {
+  let component: PichinchaModalComponent;
+  let fixture: ComponentFixture<PichinchaModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DropdownMenuComponent]
+      imports: [PichinchaModalComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DropdownMenuComponent);
+    fixture = TestBed.createComponent(PichinchaModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -11,14 +11,18 @@ import { Router } from '@angular/router';
 })
 export class ProductListComponent {
 
+
   products: Product[] = [];
   filteredProducts: Product[] = [];
   displayedProducts: Product[] = [];
   openedMenuIndex: number | null = null;
   searchQuery: string = '';
-
+  selectedProductName: string = '';
+  selectedProductId: string = '';
   currentPage: number = 1;
   pageSize: number = 5;
+  showDeleteModal = false;
+
 
   constructor(private router: Router, private productService: ProductService) { }
 
@@ -91,5 +95,26 @@ export class ProductListComponent {
       this.filteredProducts = data;
       this.updateDisplayedProducts();
     });
+  }
+  deleteProduct(product: Product) {
+    this.showDeleteModal = true;
+    this.selectedProductName = product.name;
+    this.selectedProductId = product.id;
+  }
+  confirmDeleteProduct(id: string) {
+    console.log("entree");
+    this.productService.delete(id).subscribe({
+      next: () => {
+        this.loadProducts();
+        this.showDeleteModal = false;
+      },
+      error: (err) => {
+        this.showDeleteModal = false;
+        console.error(err)
+        alert('Error al eliminar producto')
+      }
+    });
+    this.openedMenuIndex = null;
+
   }
 }

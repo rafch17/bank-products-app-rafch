@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductFormComponent } from './pages/product-form/product-form.component';
 import { ProductListComponent } from './pages/product-list/product-list.component';
 import { PichinchaButtonComponent } from '../../shared/components/pichincha-button/pichincha-button.component';
+import { PichinchaModalComponent } from '../../shared/components/pichincha-modal/pichincha-modal.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { PichinchaButtonComponent } from '../../shared/components/pichincha-butt
     ReactiveFormsModule,
     ProductRoutingModule,
     FormsModule,
-    PichinchaButtonComponent
+    PichinchaButtonComponent,
+    PichinchaModalComponent
   ]
 })
 

@@ -1,0 +1,19 @@
+<div class="modal-backdrop" *ngIf="show">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h3>{{ title }}</h3>
+            <button class="close-button" (click)="onClose()">×</button>
+        </div>
+
+        <div class="modal-body">
+            <ng-content></ng-content>
+        </div>
+
+        <div class="modal-footer">
+            <app-pichincha-button (click)="onClose()" routerLink="/products/form" label="Cancelar" [background]="'#0f265'" />
+
+            <app-pichincha-button (click)="onConfirm()" routerLink="/products/form" label="Confirmar" [background]="'#ffdd00'" />
+
+        </div>
+    </div>
+</div>

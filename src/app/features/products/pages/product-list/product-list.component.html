@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" >
     <h2 class="title">BANCO BANQUITO</h2>
 
     <div class="search-add-container">
@@ -30,7 +30,7 @@
 
                     <div *ngIf="openedMenuIndex === i" class="actions-menu">
                         <button (click)="onEdit(product.id)">Editar</button>
-                        <button (click)="onDelete(product.id)">Eliminar</button>
+                        <button (click)="deleteProduct(product)">Eliminar</button>
                     </div>
                 </td>
             </tr>
@@ -70,3 +70,11 @@
         <div class="no-results">No hay productos disponibles.</div>
     </ng-template>
 </div>
+<app-pichincha-modal
+  
+  [show]="showDeleteModal"
+  (close)="showDeleteModal = false"
+  (confirm)="confirmDeleteProduct(selectedProductId)"
+>
+  <p>¿Estás seguro de eliminar el producto? {{selectedProductName}}</p>
+</app-pichincha-modal>

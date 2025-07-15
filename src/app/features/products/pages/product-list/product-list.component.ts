@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductService } from '../../../../core/services/product.service';
 import { Product } from '../../../../core/models/product.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -9,23 +10,20 @@ import { Product } from '../../../../core/models/product.model';
   standalone: false
 })
 export class ProductListComponent {
+
   products: Product[] = [];
   filteredProducts: Product[] = [];
   displayedProducts: Product[] = [];
-
+  openedMenuIndex: number | null = null;
   searchQuery: string = '';
 
   currentPage: number = 1;
   pageSize: number = 5;
 
-  constructor(private productService: ProductService) { }
+  constructor(private router: Router, private productService: ProductService) { }
 
   ngOnInit() {
-    this.productService.getAll().subscribe(data => {
-      this.products = data;
-      this.filteredProducts = data;
-      this.updateDisplayedProducts();
-    });
+    this.loadProducts();
   }
 
   onSearch() {
@@ -61,5 +59,37 @@ export class ProductListComponent {
 
   get totalPages(): number {
     return Math.ceil(this.filteredProducts.length / this.pageSize);
+  }
+
+
+  toggleActionsMenu(index: number) {
+    if (this.openedMenuIndex === index) {
+      this.openedMenuIndex = null;
+    } else {
+      this.openedMenuIndex = index;
+    }
+  }
+
+  onEdit(productId: string) {
+    this.router.navigate(['/products/form', productId]);
+    this.openedMenuIndex = null;
+  }
+
+  onDelete(productId: string) {
+    if (confirm('¿Seguro que quieres eliminar este producto?')) {
+      this.productService.delete(productId).subscribe(() => {
+        this.loadProducts();
+      });
+    }
+    this.openedMenuIndex = null;
+  }
+
+
+  loadProducts() {
+    this.productService.getAll().subscribe(data => {
+      this.products = data;
+      this.filteredProducts = data;
+      this.updateDisplayedProducts();
+    });
   }
 }

@@ -3,24 +3,23 @@ import { CommonModule } from '@angular/common';
 
 import { ProductRoutingModule } from './products-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProductFormComponent } from './components/product-form/product-form.component';
-import { ProductCreateComponent } from './pages/product-create/product-create.component';
-import { ProductEditComponent } from './pages/product-edit/product-edit.component';
+import { ProductFormComponent } from './pages/product-form/product-form.component';
 import { ProductListComponent } from './pages/product-list/product-list.component';
+import { PichinchaButtonComponent } from '../../shared/components/pichincha-button/pichincha-button.component';
 
 
 @NgModule({
   declarations: [
     ProductListComponent,
-    ProductCreateComponent,
-    ProductEditComponent,
-    ProductFormComponent, // si ya lo creaste
+    ProductFormComponent,
+    ProductFormComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     ProductRoutingModule,
-    FormsModule
+    FormsModule,
+    PichinchaButtonComponent
   ]
 })
 

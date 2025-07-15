@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProductCreateComponent } from './product-create.component';
+import { PichinchaButtonComponent } from './pichincha-button.component';
 
-describe('ProductCreateComponent', () => {
-  let component: ProductCreateComponent;
-  let fixture: ComponentFixture<ProductCreateComponent>;
+describe('PichinchaButtonComponent', () => {
+  let component: PichinchaButtonComponent;
+  let fixture: ComponentFixture<PichinchaButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProductCreateComponent]
+      imports: [PichinchaButtonComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ProductCreateComponent);
+    fixture = TestBed.createComponent(PichinchaButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -2,16 +2,20 @@
     background-color: #f2f4f8;
     padding: 2rem;
     border-radius: 10px;
+    overflow-x: auto;
 }
 
 .title {
     text-align: center;
     color: #1d3557;
     font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .search-input {
-    width: 200px;
+    width: 100%;
+    max-width: 300px;
     padding: 0.5rem;
     margin-bottom: 1rem;
     border-radius: 5px;
@@ -30,6 +34,7 @@
         padding: 0.75rem;
         text-align: left;
         border-bottom: 1px solid #ddd;
+        font-size: 0.9rem;
     }
 
     th span {
@@ -48,6 +53,14 @@
         color: white;
         font-weight: bold;
     }
+}
+
+.avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #ccc;
 }
 
 .footer {
@@ -89,7 +102,6 @@
     }
 }
 
-
 .no-results {
     text-align: center;
     color: #888;
@@ -100,14 +112,6 @@
 .search-input:disabled {
     background-color: #f0f0f0;
     cursor: not-allowed;
-}
-
-.avatar-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid #ccc;
 }
 
 .product-table tr {
@@ -121,4 +125,79 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     position: relative;
     z-index: 1;
+}
+
+/* 📱 Responsividad */
+@media (max-width: 768px) {
+    .product-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .pagination-controls {
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    .search-input {
+        width: 100%;
+    }
+
+    .title {
+        font-size: 1.25rem;
+    }
+}
+
+.search-add-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+}
+
+.search-input {
+    flex-grow: 1;
+
+    margin-right: 1rem;
+
+}
+
+.btn-more {
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.actions-menu {
+    position: absolute;
+    top: 25px;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.actions-menu button {
+    background: none;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+}
+
+.actions-menu button:hover {
+    background-color: #f0f0f0;
 }

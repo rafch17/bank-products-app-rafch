@@ -1,8 +1,11 @@
 <div class="container">
     <h2 class="title">BANCO BANQUITO</h2>
 
-    <input type="text" [(ngModel)]="searchQuery" (input)="onSearch()" [disabled]="products.length === 0"
-        placeholder="Buscar..." class="search-input" />
+    <div class="search-add-container">
+        <input type="text" [(ngModel)]="searchQuery" (input)="onSearch()" [disabled]="products.length === 0"
+            placeholder="Buscar..." class="search-input" />
+        <app-pichincha-button routerLink="/products/form" label="Agregar" [background]="'#ffdd00'" [color]="'#0f265'" />
+    </div>
 
     <table class="product-table" *ngIf="displayedProducts.length > 0; else noResults">
         <thead>
@@ -12,20 +15,28 @@
                 <th>Descripción <span title="Descripción del producto">ℹ️</span></th>
                 <th>Fecha de liberación <span title="Fecha de liberación">ℹ️</span></th>
                 <th>Fecha de reestructuración <span title="Fecha de reestructuración">ℹ️</span></th>
+                <th></th> 
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let product of displayedProducts">
-                <td>
-                    <img [src]="product.logo" alt="{{ product.name }}" class="avatar-img" />
-                </td>
+            <tr *ngFor="let product of displayedProducts; let i = index">
+                <td><img [src]="product.logo" alt="{{ product.name }}" class="avatar-img" /></td>
                 <td>{{ product.name }}</td>
                 <td>{{ product.description }}</td>
                 <td>{{ product.date_release }}</td>
                 <td>{{ product.date_revision }}</td>
+                <td class="actions-cell" style="position: relative;">
+                    <button class="btn-more" (click)="toggleActionsMenu(i)">⋮</button>
+
+                    <div *ngIf="openedMenuIndex === i" class="actions-menu">
+                        <button (click)="onEdit(product.id)">Editar</button>
+                        <button (click)="onDelete(product.id)">Eliminar</button>
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>
+
 
     <ng-template #noResults>
         <div class="no-results">No hay productos disponibles.</div>

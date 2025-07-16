@@ -87,16 +87,24 @@ export class ProductListComponent {
 
   loadProducts() {
     this.isLoading = true;
-    setTimeout(() => {
-      
-      this.productService.getAll().subscribe(data => {
+
+
+    this.productService.getAll().subscribe({
+      next: (data) => {
         this.products = data;
         this.filteredProducts = data;
         this.updateDisplayedProducts();
-      });
-      this.isLoading = false;
-    }, 1500); 
-    
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.error(err)
+
+      }
+    });
+
+
+
   }
   deleteProduct(product: Product) {
     this.showDeleteModal = true;

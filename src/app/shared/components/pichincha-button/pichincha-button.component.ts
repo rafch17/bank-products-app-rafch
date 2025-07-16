@@ -16,7 +16,7 @@ export class PichinchaButtonComponent {
   @Input() disabled = false;
 
   @Output() clicked = new EventEmitter<void>();
-textColor: any;
+  textColor: any;
 
   handleClick() {
     if (!this.disabled) {

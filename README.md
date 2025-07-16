@@ -1,6 +1,24 @@
 # BankProductsAppRafch
 
+**BankProductsAppRafch** is a web application developed as a technical test solution. It allows users to manage a list of bank products through a user-friendly interface. The application supports **product creation, edition, deletion, validation, and form handling**, following best practices in Angular development.
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
+
+## 🔍 Features
+
+- Dynamic product list with search and pagination
+- Reactive forms with synchronous and asynchronous validations
+- Date logic handling with automatic revision date calculation
+- Distinction between create and edit modes
+- Unit tests for core functionalities
+- Clean and responsive UI
+
+<img width="1239" height="567" alt="image" src="https://github.com/user-attachments/assets/24fe2116-1c88-4228-8b75-b90f27936d1e" />
+<img width="1239" height="567" alt="image" src="https://github.com/user-attachments/assets/0c642b42-5ceb-492b-8b61-37f5cefe5ea9" />
+<img width="1239" height="567" alt="image" src="https://github.com/user-attachments/assets/512b023f-23d4-4560-960a-4d214b172fc6" />
+
+
+---
 
 ## Development server
 
